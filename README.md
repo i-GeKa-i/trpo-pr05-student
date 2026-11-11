@@ -13,10 +13,10 @@ PHP 8.1+ (проверено на 8.4), без зависимостей и Compo
 ```bash
 git clone https://github.com/i-GeKa-i/trpo-pr05-student.git
 cd trpo-pr05-student
-php -S localhost:8000 -t public
+php -S 127.0.0.1:8000 -t public
 ```
 
-Открыть <http://localhost:8000/>.
+Открыть <http://127.0.0.1:8000/>.
 
 Проверки (код выхода 0 — всё хорошо):
 
