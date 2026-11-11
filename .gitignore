@@ -1,0 +1,14 @@
+# редакторы и IDE
+.idea/
+.vscode/
+*.swp
+*~
+
+# ОС
+.DS_Store
+Thumbs.db
+
+# зависимости и локальные файлы
+/vendor/
+.env
+*.log
