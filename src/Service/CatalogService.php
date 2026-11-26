@@ -5,17 +5,12 @@ declare(strict_types=1);
 require_once __DIR__ . '/../Model/Product.php';
 require_once __DIR__ . '/../Model/Category.php';
 
-/**
- * Читает products.json / categories.json и строит из них объекты.
- * Содержит фильтрацию и агрегаты; HTML здесь не формируется.
- */
+
 final class CatalogService
 {
-    /** @var Product[] */
+    
     private array $products = [];
-    /** @var array<int, Category> id => Category */
     private array $categories = [];
-    /** @var string[] Описания строк dataset, которые не удалось превратить в объект */
     private array $errors = [];
 
     public function __construct(string $productsPath, string $categoriesPath)
@@ -36,7 +31,7 @@ final class CatalogService
                     (string)($row['name'] ?? ''),
                     (float)($row['price'] ?? -1),
                     (int)($row['category_id'] ?? 0),
-                    (bool)($row['active'] ?? true) // необязательное поле
+                    (bool)($row['active'] ?? true) 
                 );
                 if (!isset($this->categories[$product->categoryId()])) {
                     throw new InvalidArgumentException("Товар #{$product->id()}: неизвестная категория {$product->categoryId()}");
@@ -48,13 +43,13 @@ final class CatalogService
         }
     }
 
-    /** @return Product[] */
+
     public function products(): array
     {
         return $this->products;
     }
 
-    /** @return Category[] */
+
     public function categories(): array
     {
         return array_values($this->categories);
@@ -70,16 +65,13 @@ final class CatalogService
         return $this->category($product->categoryId());
     }
 
-    /** @return string[] */
+
     public function errors(): array
     {
         return $this->errors;
     }
 
-    /**
-     * Фильтр каталога. $categoryId = null — без фильтра по категории.
-     * @return Product[]
-     */
+
     public function filter(?int $categoryId = null, bool $onlyAvailable = false): array
     {
         return array_values(array_filter(
@@ -89,7 +81,7 @@ final class CatalogService
         ));
     }
 
-    /** Средняя цена набора товаров; для пустого набора — 0.0, без деления на ноль. */
+
     public function averagePrice(array $products): float
     {
         if ($products === []) {
@@ -98,7 +90,7 @@ final class CatalogService
         return array_sum(array_map(fn(Product $p) => $p->price(), $products)) / count($products);
     }
 
-    /** @return array<int, mixed> */
+
     private function readJson(string $path): array
     {
         $raw = @file_get_contents($path);
