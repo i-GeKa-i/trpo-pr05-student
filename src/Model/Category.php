@@ -2,7 +2,6 @@
 
 declare(strict_types=1);
 
-/** Категория товаров. Товар ссылается на неё по id (Product::categoryId). */
 final class Category
 {
     public function __construct(
