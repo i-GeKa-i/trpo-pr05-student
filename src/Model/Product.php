@@ -2,11 +2,6 @@
 
 declare(strict_types=1);
 
-/**
- * Товар каталога. Поля соответствуют data/class_requirements.csv:
- * id, name, price, categoryId (обязательные) + необязательный флаг active.
- * Модель не знает ни про HTML, ни про JSON — только данные и поведение.
- */
 final class Product
 {
     public function __construct(
@@ -51,7 +46,7 @@ final class Product
         return $this->categoryId;
     }
 
-    // --- методы предметной области ---
+
 
     public function isAvailable(): bool
     {
@@ -63,7 +58,6 @@ final class Product
         return $this->categoryId === $category->id();
     }
 
-    /** Цена со скидкой в процентах (0..100). */
     public function priceWithDiscount(float $percent): float
     {
         if ($percent < 0 || $percent > 100) {
@@ -72,7 +66,6 @@ final class Product
         return round($this->price * (1 - $percent / 100), 2);
     }
 
-    /** Цена для вывода: "1 124,00 ₽". */
     public function formattedPrice(): string
     {
         return number_format($this->price, 2, ',', ' ') . ' ₽';
