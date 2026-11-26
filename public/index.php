@@ -19,7 +19,7 @@ try {
     $fatal = $ex->getMessage();
 }
 
-// Обработка фильтра (отдельно от моделей). Некорректная категория -> сообщение, а не warning.
+
 $filterError = null;
 $categoryId = null;
 $onlyAvailable = isset($_GET['available']);
